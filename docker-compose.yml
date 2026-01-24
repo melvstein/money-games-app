@@ -1,0 +1,22 @@
+services:
+  money-games-app-mysql:
+    image: mysql:8.0
+    container_name: money-games-app-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_DATABASE: money_games
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: app_password
+    volumes:
+      - money-games-app-mysql-data:/var/lib/mysql
+    networks:
+      - money-games-app-tier
+
+volumes:
+  money-games-app-mysql-data:
+
+networks:
+  money-games-app-tier:
+    driver: bridge
