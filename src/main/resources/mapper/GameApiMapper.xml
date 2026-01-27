@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.melvstein.money_games.base.mapper.GameApiMapper">
+
+    <!-- Result map to handle extra_info JSON -->
+    <resultMap id="gameApiResultMap" type="dev.melvstein.money_games.base.model.GameApi">
+        <id property="id" column="id"/>
+        <result property="gameApiId" column="game_api_id"/>
+        <result property="gameApiName" column="game_api_name"/>
+        <result property="status" column="status"/>
+        <result property="isSeamless" column="is_seamless"/>
+        <result property="extraInfo" column="extra_info" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <!-- Select all game APIs -->
+    <select id="selectAllGameApis" resultMap="gameApiResultMap">
+        SELECT * FROM game_apis
+    </select>
+
+</mapper>
