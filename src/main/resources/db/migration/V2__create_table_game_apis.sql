@@ -1,7 +1,8 @@
 CREATE TABLE IF NOT EXISTS game_apis (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    game_api_id INT(12) UNIQUE NOT NULL,
-    game_api_name VARCHAR(50) UNIQUE NOT NULL,
+    game_provider_id INT(12) UNIQUE NOT NULL,
+    game_provider_name VARCHAR(50) UNIQUE NOT NULL,
+    display_name VARCHAR(100) NOT NULL,
     status TINYINT(1) NOT NULL DEFAULT 1,
     is_seamless BOOLEAN NOT NULL DEFAULT TRUE,
     extra_info JSON,

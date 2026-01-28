@@ -1,4 +1,4 @@
-package dev.melvstein.money_games.base.dto.response;
+package dev.melvstein.money_games.app.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

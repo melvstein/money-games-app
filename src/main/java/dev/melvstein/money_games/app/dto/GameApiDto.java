@@ -1,4 +1,4 @@
-package dev.melvstein.money_games.base.dto;
+package dev.melvstein.money_games.app.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
@@ -10,8 +10,9 @@ import java.util.Map;
 @Builder
 public record GameApiDto(
         BigInteger id,
-        Integer gameApiId,
-        String gameApiName,
+        Integer gameProviderId,
+        String gameProviderName,
+        String displayName,
         Integer status,
         Boolean isSeamless,
         Map<String, Object> extraInfo,

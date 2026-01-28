@@ -1,8 +1,7 @@
-package dev.melvstein.money_games.base.enums;
+package dev.melvstein.money_games.app.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @RequiredArgsConstructor

@@ -3,10 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="dev.melvstein.money_games.base.mapper.GameApiMapper">
+<mapper namespace="dev.melvstein.money_games.app.mapper.GameApiMapper">
 
     <!-- Result map to handle extra_info JSON -->
-    <resultMap id="gameApiResultMap" type="dev.melvstein.money_games.base.model.GameApi">
+    <resultMap id="gameApiResultMap" type="dev.melvstein.money_games.app.model.GameApi">
         <id property="id" column="id"/>
         <result property="gameApiId" column="game_api_id"/>
         <result property="gameApiName" column="game_api_name"/>

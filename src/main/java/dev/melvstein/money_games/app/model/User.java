@@ -1,4 +1,4 @@
-package dev.melvstein.money_games.base.model;
+package dev.melvstein.money_games.app.model;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigInteger;
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @TableName("users")
 @Data
@@ -39,8 +39,8 @@ public class User {
     private String passwordHash;
 
     @TableField(value = "created_at", fill = FieldFill.INSERT)
-    private Instant createdAt;
+    private LocalDateTime createdAt;
 
     @TableField(value = "updated_at", fill = FieldFill.INSERT_UPDATE)
-    private Instant updatedAt;
+    private LocalDateTime updatedAt;
 }

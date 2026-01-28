@@ -1,4 +1,4 @@
-package dev.melvstein.money_games.base.dto.request;
+package dev.melvstein.money_games.app.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -6,11 +6,14 @@ import jakarta.validation.constraints.NotNull;
 import java.util.Map;
 
 public record GameApiAddRequest(
-        @NotNull(message = "gameApiId is required")
-        Integer gameApiId,
+        @NotNull(message = "gameProviderId is required")
+        Integer gameProviderId,
 
-        @NotBlank(message = "gameApiName is required")
-        String gameApiName,
+        @NotBlank(message = "gameProviderName is required")
+        String gameProviderName,
+
+        @NotBlank(message = "displayName is required")
+        String displayName,
 
         @NotNull(message = "status is required")
         Integer status,

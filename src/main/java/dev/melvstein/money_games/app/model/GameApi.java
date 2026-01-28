@@ -1,4 +1,4 @@
-package dev.melvstein.money_games.base.model;
+package dev.melvstein.money_games.app.model;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
@@ -20,11 +20,14 @@ public class GameApi {
     @TableId(type = IdType.AUTO)
     private BigInteger id;
 
-    @TableField("game_api_id")
-    private Integer gameApiId;
+    @TableField("game_provider_id")
+    private Integer gameProviderId;
 
-    @TableField("game_api_name")
-    private String gameApiName;
+    @TableField("game_provider_name")
+    private String gameProviderName;
+
+    @TableField("display_name")
+    private  String displayName;
 
     private Integer status;
 
