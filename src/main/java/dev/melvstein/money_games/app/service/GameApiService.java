@@ -1,7 +1,9 @@
 package dev.melvstein.money_games.app.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import dev.melvstein.money_games.app.dto.request.GameApiGetAllRequest;
 import dev.melvstein.money_games.app.mapper.GameApiMapper;
 import dev.melvstein.money_games.app.model.GameApi;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +22,24 @@ public class GameApiService extends ServiceImpl<GameApiMapper, GameApi> {
     public final static int STATUS_MAINTENANCE = 2;
 
     @Transactional(readOnly = true)
-    public List<GameApi> getAllGameApis() {
-        return list(new LambdaQueryWrapper<GameApi>());
+    public Page<GameApi> getAllGameApis(GameApiGetAllRequest request) {
+        Page<GameApi> pageRequest = new Page<>(request.page(), request.size());
+
+        LambdaQueryWrapper<GameApi> queryWrapper = new LambdaQueryWrapper<GameApi>()
+                .eq(request.status() != null, GameApi::getStatus, request.status())
+                .orderBy(
+                        request.sortOrder().equalsIgnoreCase("desc"),
+                        true,
+                        switch (request.sortBy()) {
+                            case "gameProviderId" -> GameApi::getGameProviderId;
+                            case "displayName" -> GameApi::getDisplayName;
+                            case "status" -> GameApi::getStatus;
+                            case "isSeamless" -> GameApi::getIsSeamless;
+                            case "updatedAt" -> GameApi::getUpdatedAt;
+                            default -> GameApi::getCreatedAt;
+                        });
+
+        return page(pageRequest, queryWrapper);
     }
 
     @Transactional(readOnly = true)

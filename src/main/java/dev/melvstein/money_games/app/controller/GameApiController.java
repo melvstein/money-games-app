@@ -1,8 +1,10 @@
 package dev.melvstein.money_games.app.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import dev.melvstein.money_games.app.Helper.Util;
 import dev.melvstein.money_games.app.dto.GameApiDto;
 import dev.melvstein.money_games.app.dto.request.GameApiAddRequest;
+import dev.melvstein.money_games.app.dto.request.GameApiGetAllRequest;
 import dev.melvstein.money_games.app.dto.request.GameApiUpdateRequest;
 import dev.melvstein.money_games.app.dto.response.ApiResponse;
 import dev.melvstein.money_games.app.enums.ApiResponseCode;
@@ -30,14 +32,17 @@ public class GameApiController extends  BaseController {
     private final ObjectMapper objectMapper;
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<GameApiDto>>> getAllGameApis() {
-        List<GameApi> gameApis = gameApiService.getAllGameApis();
+    public ResponseEntity<ApiResponse<Page<GameApiDto>>> getAllGameApis(
+            @ModelAttribute GameApiGetAllRequest request
+    ) {
+        Page<GameApi> gameApis = gameApiService.getAllGameApis(request);
+        Page<GameApiDto> dtoPage = (Page<GameApiDto>) gameApis.convert(GameApiConverter::toDto);
 
         return ResponseEntity.ok(
-                ApiResponse.<List<GameApiDto>>builder()
+                ApiResponse.<Page<GameApiDto>>builder()
                         .code(ApiResponseCode.SUCCESS.getCode())
                         .message("Fetch all game APIs successfully")
-                        .data(GameApiConverter.toDtos(gameApis))
+                        .data(dtoPage)
                         .build()
         );
     }
