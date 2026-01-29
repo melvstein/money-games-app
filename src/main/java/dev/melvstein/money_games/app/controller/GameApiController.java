@@ -126,4 +126,30 @@ public class GameApiController extends  BaseController {
                         .build()
         );
     }
+
+    @DeleteMapping("/game-provider-id/{gameProviderId}")
+    public ResponseEntity<ApiResponse<Void>> deleteByGameProviderId(
+            @PathVariable Integer gameProviderId
+    ) {
+        boolean deleted = gameApiService.deleteByGameProviderId(gameProviderId);
+
+        if (!deleted) {
+            log.error("{} - GameProviderId {} not found", Util.getClassAndMethod(), gameProviderId);
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(
+                            ApiResponse.<Void>builder()
+                                    .code(ApiResponseCode.NOT_FOUND.getCode())
+                                    .message("Game Provider ID " + gameProviderId + " not found")
+                                    .build()
+                    );
+        }
+
+        return ResponseEntity.ok(
+                ApiResponse.<Void>builder()
+                        .code(ApiResponseCode.SUCCESS.getCode())
+                        .message("Delete game API successfully")
+                        .build()
+        );
+    }
 }

@@ -48,6 +48,12 @@ public class GameApiService extends ServiceImpl<GameApiMapper, GameApi> {
         return removeById(id);
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public boolean deleteByGameProviderId(Integer gameProviderId) {
+        return remove(new LambdaQueryWrapper<GameApi>()
+                .eq(GameApi::getGameProviderId, gameProviderId));
+    }
+
     @Transactional(readOnly = true)
     public GameApi getGameApiById(BigInteger id) {
         return getById(id);
