@@ -24,12 +24,14 @@ public class GameApiService extends ServiceImpl<GameApiMapper, GameApi> {
     @Transactional(readOnly = true)
     public Page<GameApi> getAllGameApis(GameApiGetAllRequest request) {
         Page<GameApi> pageRequest = new Page<>(request.page(), request.size());
+        boolean isAsc = !"desc".equalsIgnoreCase(request.sortOrder());
 
         LambdaQueryWrapper<GameApi> queryWrapper = new LambdaQueryWrapper<GameApi>()
                 .eq(request.status() != null, GameApi::getStatus, request.status())
+                .eq(request.isSeamless() != null, GameApi::getIsSeamless, request.isSeamless())
                 .orderBy(
-                        request.sortOrder().equalsIgnoreCase("desc"),
                         true,
+                        isAsc,
                         switch (request.sortBy()) {
                             case "gameProviderId" -> GameApi::getGameProviderId;
                             case "displayName" -> GameApi::getDisplayName;

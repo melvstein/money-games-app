@@ -13,7 +13,8 @@ public record GameApiGetAllRequest(
 
         String sortBy,
         String sortOrder,
-        String status
+        String status,
+        Boolean isSeamless
 ) {
     public GameApiGetAllRequest {
         if (page == null || page < 1) {
